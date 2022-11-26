@@ -4,12 +4,23 @@ const core = require("@actions/core");
 
 const getBranchName = (context) => {
   const {ref} = context;
-  return ref.split("/").slice(-1);
-
+  return ref.split("/").slice(-1)[0];
 }
 
+const { context, repository } = github;
+const toolkit = github.getOctokit(core.getInput("token"));
+
+
+
 core.startGroup("LOG")
-console.log(github);
+
+const test = toolkit.rest.repos.getLatestRelease({
+  owner: context.actor,
+  ...respository
+});
+
+console.log(test);
+
 core.endGroup();
 
-console.log(getBranchName(github.context))
+console.log(getBranchName(context))
