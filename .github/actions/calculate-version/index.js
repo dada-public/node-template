@@ -14,13 +14,12 @@ const getCurrentRelease = async (toolkit, context) => {
   return response.data.length === 0 ? '0.0.0' : response.data.tag_name;
 }
 
-const { context } = github;
-const toolkit = github.getOctokit(core.getInput("token"));
-
-
 ( async () => {
+  const token = core.getInput("token");
+  const toolkit = github.getOctokit(token);
+  const { context } = github;
 
-  const currentRelease = await getCurrentRelease();
+  const currentRelease = await getCurrentRelease(toolkit, context);
 
   core.startGroup("LOG")
   console.log(currentRelease);
