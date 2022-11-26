@@ -19,7 +19,15 @@ const getCurrentReleaseTag = async (toolkit, context) => {
 }
 
 const calculateNextVersion = (current, branch, patterns) => {
+  const {major, minor, patch} = patterns;
 
+  const action = branch.includes(major)
+                  ? "major"
+                  : branch.includes("minor")
+                  ? "minor"
+                  : "patch";
+
+  console.log(action);
 }
 
 ( async () => {
@@ -34,11 +42,13 @@ const calculateNextVersion = (current, branch, patterns) => {
     patch: core.getInput("patch-pattern")
   }
 
+  const branchName = await getBranchName(context);
   const currentRelease = await getCurrentReleaseTag(toolkit, context);
 
   core.startGroup("LOG")
   console.log(currentRelease);
   console.log(patterns);
+  calculateNextVersion(currentRelease, branchName, patterns);
   core.endGroup();
 
 })()
