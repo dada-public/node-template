@@ -16,7 +16,7 @@ core.startGroup("LOG")
 
 const test = toolkit.rest.repos.getLatestRelease({
   owner: context.actor,
-  ...respository
+  repo: context.payload.repository?.full_name
 });
 
 console.log(test);
