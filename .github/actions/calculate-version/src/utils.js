@@ -1,11 +1,13 @@
 const semver = require("semver");
 
-module.exports.getBranchName = (context) => {
+const getBranchName = (context) => {
   const {ref} = context;
   return ref.split("/").slice(-1)[0];
 }
 
-module.exports.getCurrentReleaseTag = async (toolkit, context) => {
+module.exports = getBranchName;
+
+const getCurrentReleaseTag = async (toolkit, context) => {
   try {
     const response = await toolkit.rest.repos.getLatestRelease({
       ...context.repo
@@ -16,7 +18,9 @@ module.exports.getCurrentReleaseTag = async (toolkit, context) => {
   }
 }
 
-module.exports.calculateNextVersion = (current, branch, patterns) => {
+module.exports = getCurrentReleaseTag;
+
+const calculateNextVersion = (current, branch, patterns) => {
   const {major, minor, patch} = patterns;
 
   const action = branch.includes(major)
@@ -28,8 +32,12 @@ module.exports.calculateNextVersion = (current, branch, patterns) => {
   return !current ? "0.0.0" : semver.inc(current, action);
 }
 
-module.exports.run = async (context, toolkit, patterns) => {
+module.exports = calculateNextVersion;
+
+const run = async (context, toolkit, patterns) => {
   const branchName = await getBranchName(context);
   const currentRelease = await getCurrentReleaseTag(toolkit, context);
   return calculateNextVersion(currentRelease, branchName, patterns);
 }
+
+module.exports = run;

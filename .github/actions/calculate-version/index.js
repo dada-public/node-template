@@ -1,11 +1,6 @@
 const github = require("@actions/github");
 const core   = require("@actions/core");
-const {
-  getBranchName,
-  getCurrentReleaseTag,
-  calculateNextVersion,
-  run
-} = require("./src/utils");
+const { run } = require("./src/utils");
 
 ( async () => {
 
