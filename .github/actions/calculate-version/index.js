@@ -7,15 +7,14 @@ const getBranchName = (context) => {
   return ref.split("/").slice(-1)[0];
 }
 
-const { context, repository } = github;
+const { context } = github;
 const toolkit = github.getOctokit(core.getInput("token"));
 
 
 ( async () => {
 
   const test = await toolkit.rest.repos.getLatestRelease({
-    owner: context.actor,
-    repo: context.payload.repository?.full_name
+    ...context.repo
   });
 
   core.startGroup("LOG")
