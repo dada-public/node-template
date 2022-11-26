@@ -31,7 +31,7 @@ const calculateNextVersion = (current, branch, patterns) => {
   const patterns = {
     major: core.getInput("major-pattern"),
     minor: core.getInput("minor-pattern"),
-    patch: core.getInput("patch-pattern");
+    patch: core.getInput("patch-pattern")
   }
 
   const currentRelease = await getCurrentReleaseTag(toolkit, context);
