@@ -11,7 +11,7 @@ const getCurrentRelease = async (toolkit, context) => {
   const response = await toolkit.rest.repos.getLatestRelease({
     ...context.repo
   });
-  return response.data.length === 0 ? '0.0.0' : response.data.tag_name;
+  return response
 }
 
 ( async () => {
