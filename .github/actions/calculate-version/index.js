@@ -11,16 +11,16 @@ const { context, repository } = github;
 const toolkit = github.getOctokit(core.getInput("token"));
 
 
+( async () => {
 
-core.startGroup("LOG")
+  const test = await toolkit.rest.repos.getLatestRelease({
+    owner: context.actor,
+    repo: context.payload.repository?.full_name
+  });
 
-const test = toolkit.rest.repos.getLatestRelease({
-  owner: context.actor,
-  repo: context.payload.repository?.full_name
-});
+  core.startGroup("LOG")
+  console.log(test);
+  core.endGroup();
 
-console.log(test);
 
-core.endGroup();
-
-console.log(getBranchName(context))
+})()
