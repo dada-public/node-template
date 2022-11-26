@@ -13,12 +13,12 @@ const toolkit = github.getOctokit(core.getInput("token"));
 
 ( async () => {
 
-  const test = await toolkit.rest.repos.getLatestRelease({
+  const release = await toolkit.rest.repos.listReleases({
     ...context.repo
   });
 
   core.startGroup("LOG")
-  console.log(test);
+  console.log(release.data.tag_name);
   core.endGroup();
 
 
