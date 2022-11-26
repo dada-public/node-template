@@ -8,10 +8,14 @@ const getBranchName = (context) => {
 }
 
 const getCurrentRelease = async (toolkit, context) => {
-  const response = await toolkit.rest.repos.getLatestRelease({
-    ...context.repo
-  });
-  return response
+  try {
+    const response = await toolkit.rest.repos.getLatestRelease({
+      ...context.repo
+    });
+    return response.data.tag_name;
+  } catch (err) {
+    console.log(err.message);
+  }
 }
 
 ( async () => {
