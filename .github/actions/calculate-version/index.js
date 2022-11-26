@@ -4,7 +4,7 @@ const {
   getBranchName,
   getCurrentReleaseTag,
   calculateNextVersion
-} = require("src/utils");
+} = require("./src/utils");
 
 ( async () => {
 
