@@ -3,7 +3,8 @@ const core   = require("@actions/core");
 const {
   getBranchName,
   getCurrentReleaseTag,
-  calculateNextVersion
+  calculateNextVersion,
+  run
 } = require("./src/utils");
 
 ( async () => {
@@ -18,14 +19,10 @@ const {
     patch: core.getInput("patch-pattern")
   }
 
-  const branchName = await getBranchName(context);
-  const currentRelease = await getCurrentReleaseTag(toolkit, context);
+  const nextVersion = await run(context, toolkit, patterns);
 
-  core.startGroup("LOG")
-  console.log(currentRelease);
-  console.log(patterns);
-  const nextVersion = calculateNextVersion(currentRelease, branchName, patterns);
-  console.log(`Next Version: ${nextVersion}`);
-  core.endGroup();
+  core.setOutput(nextVersion);
+
+  console.log(nextVersion);
 
 })()

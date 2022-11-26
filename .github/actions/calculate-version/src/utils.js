@@ -27,3 +27,9 @@ module.exports.calculateNextVersion = (current, branch, patterns) => {
 
   return !current ? "0.0.0" : semver.inc(current, action);
 }
+
+module.exports.run = async (context, toolkit, patterns) => {
+  const branchName = await getBranchName(context);
+  const currentRelease = await getCurrentReleaseTag(toolkit, context);
+  return calculateNextVersion(currentRelease, branchName, patterns);
+}
