@@ -7,17 +7,23 @@ const getBranchName = (context) => {
   return ref.split("/").slice(-1)[0];
 }
 
+const getCurrentRelease = async (toolkit, context) => {
+  const response = await toolkit.rest.repos.getLatestRelease({
+    ...context.repo
+  });
+  return response.data.length === 0 ? '0.0.0' : response.data.tag_name;
+}
+
 const { context } = github;
 const toolkit = github.getOctokit(core.getInput("token"));
 
 
 ( async () => {
 
-  const releases = await toolkit.rest.repos.getLatestRelease({
-    ...context.repo
-  });
+  const currentRelease = await getCurrentRelease();
+
   core.startGroup("LOG")
-  console.log(releases);
+  console.log(currentRelease);
   core.endGroup();
 
 })()
