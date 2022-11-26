@@ -7,26 +7,38 @@ const getBranchName = (context) => {
   return ref.split("/").slice(-1)[0];
 }
 
-const getCurrentRelease = async (toolkit, context) => {
+const getCurrentReleaseTag = async (toolkit, context) => {
   try {
     const response = await toolkit.rest.repos.getLatestRelease({
       ...context.repo
     });
     return response.data.tag_name;
   } catch (err) {
-    console.log(err.message);
+    return null;
   }
 }
 
+const calculateNextVersion = (current, branch, patterns) => {
+
+}
+
 ( async () => {
+
   const token = core.getInput("token");
   const toolkit = github.getOctokit(token);
   const { context } = github;
 
-  const currentRelease = await getCurrentRelease(toolkit, context);
+  const patterns = {
+    major: core.getInput("major-pattern"),
+    minor: core.getInput("minor-pattern"),
+    patch: core.getInput("patch-pattern");
+  }
+
+  const currentRelease = await getCurrentReleaseTag(toolkit, context);
 
   core.startGroup("LOG")
   console.log(currentRelease);
+  console.log(patterns);
   core.endGroup();
 
 })()
