@@ -23,11 +23,11 @@ const calculateNextVersion = (current, branch, patterns) => {
 
   const action = branch.includes(major)
                   ? "major"
-                  : branch.includes("minor")
+                  : branch.includes(minor)
                   ? "minor"
                   : "patch";
 
-  console.log(action);
+  return !current ? "0.0.0" : semver.inc(current, action);
 }
 
 ( async () => {
@@ -48,7 +48,8 @@ const calculateNextVersion = (current, branch, patterns) => {
   core.startGroup("LOG")
   console.log(currentRelease);
   console.log(patterns);
-  calculateNextVersion(currentRelease, branchName, patterns);
+  const nextVersion = calculateNextVersion(currentRelease, branchName, patterns);
+  console.log(`Next Version: ${nextVersion}`);
   core.endGroup();
 
 })()
