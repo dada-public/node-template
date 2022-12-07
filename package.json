@@ -1,0 +1,28 @@
+{
+  "name": "node-template",
+  "version": "1.0.0",
+  "description": "A node start up template",
+  "main": "index.js",
+  "dependencies": {
+    "jest": "^29.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dada-public/node-template.git"
+  },
+  "keywords": [
+    "Node",
+    "templates",
+    "startup"
+  ],
+  "author": "Victor Santiago <vsantiago.public@protonmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dada-public/node-template/issues"
+  },
+  "homepage": "https://github.com/dada-public/node-template#readme"
+}
