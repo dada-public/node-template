@@ -1,5 +1,5 @@
-describe("fooaskd", () => {
-  it("fasdñkfas", () => {
-    console.log("A test");
+describe("A sample scenario", () => {
+  it("A sample test", () => {
+    console.log("Write your tests here!");
   });
 });
