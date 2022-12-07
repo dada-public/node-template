@@ -1,8 +1,12 @@
 {
   "name": "node-template",
   "version": "1.0.0",
-  "description": "A startup template for node projects",
+  "description": "A node start up template",
   "main": "index.js",
+  "dependencies": {
+    "jest": "^29.3.1"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch"
@@ -12,8 +16,8 @@
     "url": "git+https://github.com/dada-public/node-template.git"
   },
   "keywords": [
-    "node",
-    "template",
+    "Node",
+    "templates",
     "startup"
   ],
   "author": "Victor Santiago <vsantiago.public@protonmail.com>",
@@ -21,8 +25,6 @@
   "bugs": {
     "url": "https://github.com/dada-public/node-template/issues"
   },
-  "homepage": "https://github.com/dada-public/node-template#readme",
-  "devDependencies": {
-    "jest": "^29.3.1"
-  }
+  "private": true,
+  "homepage": "https://github.com/dada-public/node-template#readme"
 }
