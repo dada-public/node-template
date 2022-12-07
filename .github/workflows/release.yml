@@ -3,6 +3,7 @@ name: Release workflow
 on:
   push:
     branches:
+      - main
       - master
 
 env:
