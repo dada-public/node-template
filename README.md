@@ -1,10 +1,9 @@
 # Node startup template
 
-Node project startup template. 
-
+A template repository for new Node projects.
 
 ## About this repository
 
 ## Workflows
 
-// TBD
+There are 2
