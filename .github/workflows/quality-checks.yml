@@ -1,10 +1,10 @@
-name: Testing
+name: Quality checks
 
 on:
   pull_request:
 
 jobs:
-  release:
+  quality-checks:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -17,7 +17,11 @@ jobs:
         with:
           node-version: current
 
-      - name: Release
-        run: |
-          npm ci
-          npm run test
+      - name: Install
+        run: npm ci
+
+      - name: Unit tests
+        run: npm run test
+
+      - name: Lint
+        run: npm run lint
